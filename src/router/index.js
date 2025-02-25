@@ -29,7 +29,7 @@ const router = createRouter({
       component: BlogView,
     },
     {
-      path:'/post:id',
+      path:'/post/:id',
       name:'post',
       component:SingleView,
 

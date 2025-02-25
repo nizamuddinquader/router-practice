@@ -1,4 +1,16 @@
 <script setup>
+    import { useRoute } from 'vue-router';
+    import { ref, onBeforeMount } from 'vue';
+
+    const post = ref([]);
+    const route = useRoute();
+    const postId = route.params.id
+
+    onBeforeMount(async()=>{
+        const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`);
+        const data = await response.json();
+        post.value = data
+    })
 
 </script>
 
@@ -15,15 +27,9 @@
                         <span class="text-sm text-gray-500">Posted on January 15, 2024</span>
                     </div>
                 </div>
-                <h1 class="text-3xl font-bold text-gray-800 mb-4">Getting Started with TailwindCSS</h1>
+                <h1 class="text-3xl font-bold text-gray-800 mb-4">{{ post.title }}</h1>
                 <div class="prose max-w-none">
-                    <p class="text-gray-600 mb-4">TailwindCSS has revolutionized the way we write CSS. In this comprehensive guide, we'll explore how to set up TailwindCSS in your project and leverage its utility-first approach to create beautiful, responsive designs.</p>
-                    <h2 class="text-2xl font-semibold text-gray-800 mt-6 mb-4">Why Choose TailwindCSS?</h2>
-                    <p class="text-gray-600 mb-4">TailwindCSS provides a highly customizable, low-level CSS framework that gives you all the building blocks you need to build bespoke designs without any annoying opinionated styles you have to fight to override.</p>
-                    <blockquote class="border-l-4 border-blue-500 pl-4 my-6 italic text-gray-700">"TailwindCSS is the only framework that I've seen scale on large teams. It's easy to customize, adapts to any design, and the build size is tiny." - Adam Wathan</blockquote>
-                    <h2 class="text-2xl font-semibold text-gray-800 mt-6 mb-4">Getting Started</h2>
-                    <p class="text-gray-600 mb-4">To get started with TailwindCSS, you'll need to install it via npm:</p>
-                    <pre class="bg-gray-100 p-4 rounded-lg mb-4"><code>npm install tailwindcss</code></pre>
+                    {{ post.body }}
                 </div>
                 <div class="mt-8 pt-8 border-t border-gray-200">
                     <div class="flex items-center justify-between">
