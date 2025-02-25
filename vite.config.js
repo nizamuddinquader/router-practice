@@ -10,7 +10,7 @@ export default defineConfig({
     vue(),
     vueDevTools(),
   ],
-  base:'router-practice',
+  base:'/router-practice',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
